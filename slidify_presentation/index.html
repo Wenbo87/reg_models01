@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exploring Transmission Impact on Automobile Efficiency</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Exploring Transmission Impact on Automobile Efficiency">
+  <meta name="author" content="Logan J Travis">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Exploring Transmission Impact on Automobile Efficiency</h1>
+    <h2>Using Shiny App and MTCARS Dataset</h2>
+    <p>Logan J Travis<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Executive Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Many struggle to understand the impact of discrete variables in statistical models</li>
+<li>Investigate automobile efficiency as a familiar and accessible example</li>
+<li>Design a simple application targeting non-statisticians to:
+
+<ul>
+<li>Interactively model fuel efficiency (MPG) using a variety of continuous variables<br>(e.g. weight, engine displacement)</li>
+<li>Compare model fit after adding a discrete variable (transmission type)</li>
+</ul></li>
+<li>Host the application online for all to experience!</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Dataset and Methodology</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3><a href="http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html">MTCARS Dataset</a></h3>
+
+<ul>
+<li>Part of the base R package</li>
+<li>Extracted from the 1974 <em>Motor Trend</em> US magazine</li>
+<li>Compares fuel consumption against 10 variable for 32 automobiles</li>
+</ul>
+
+<h3>Linear Regression Models</h3>
+
+<ul>
+<li>Regression by transmission type yields useful results (details on next slide)</li>
+<li>Attempt to improve by regressing other variables</li>
+<li>Compare single variable versus adding transmission type</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Example Regression Against Transmission Type</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="assets/fig/plotMPG%7ETrans.png" alt="plot of chunk plotMPG~Trans"> </p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li>Linear regression for MPG ~ transmission <em>suggests</em> a benefit for manuals
+
+<ul>
+<li>The P-value for the slope (two-sided) bests a 99.9% confidence interval</li>
+<li>The P-value for the intercept greatly exceeds 99.9% confidence</li>
+</ul></li>
+<li>Yet, predictions from transmission alone spread +/- 10 MPG</li>
+<li>Would you buy a car offering 6 to 27 MPG?</li>
+</ul>
+
+<pre><code>##   Transmission   Fit  Lower Upper
+## 1       Manual 24.39 14.003 34.78
+## 2    Automatic 17.15  6.876 27.42
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Shiny App</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Available on the <a href="http://lonejt.shinyapps.io/shiny_app/">Rstudio Shiny App Server</a></li>
+<li><p>Input controls for predictor, interval, and color coding by transmission</p>
+
+<p><img src = "./assets/img/app_inputs.png" /></p></li>
+<li><p>Plots comparing single and multi-variable regression</p></li>
+<li><p>Tabs for summary statistics and table data</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Interpreting Results</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Many variables yield tighter fits than transmission type notably:
+
+<ul>
+<li>Displacement (cu. in.) with P-value of 9.38e-10</li>
+<li>Weight (lb/1000) with a P-value of 1.29e-10</li>
+</ul></li>
+<li>Adding transmission type did not improve better-fit variables</li>
+<li>Adding transmission type <em>did</em> improve predictor P-values for poorer-fit<br>variables such as Gross Horsepower and 1/4 Mile Time</li>
+<li>However, model quality (determined by adjusted R squared) always decreased</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Executive Summary'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Dataset and Methodology'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Example Regression Against Transmission Type'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Shiny App'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Interpreting Results'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
